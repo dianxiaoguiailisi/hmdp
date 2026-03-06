@@ -34,6 +34,13 @@ import java.util.concurrent.TimeUnit;
 @Service
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+    /**
+     * 这里为什么使用@Resource注解：
+     * 1. 在Spring Boot的架构中，依赖于IoC容器的自动装配机制，底层的连接工作已经通过配置文件完成了
+     * 在Spring容器初始化的过程中，底层的 RedisAutoConfiguration 自动配置类会读取上述YAML配置，
+     * 并在生命周期内自动向IoC容器中注册 RedisConnectionFactory 以及 StringRedisTemplate 等核心 Bean。
+     * 2. 通过 @Resource 直接从容器中获取了已经装配好的 StringRedisTemplate 实例，并将其传递给 RefreshTokenInterceptor 拦截器使用。
+     */
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
