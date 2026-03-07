@@ -26,6 +26,7 @@ public class RefreshTokenInterceptor implements HandlerInterceptor {
         //1.获取请求头中的token
         String token = request.getHeader("authorization");
         if (StrUtil.isBlank(token)) {
+            System.out.println(token);
             return  true;
         }
         String key = "login:token" + token;

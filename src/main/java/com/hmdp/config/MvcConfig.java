@@ -27,8 +27,8 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())//注册拦截器
                 .excludePathPatterns(//拦截路劲（排除）
-                        "/user/code","/user/login","/blog/hot","/shop/**","shop-type/**","/voucher/**"
-                );
-        registry.addInterceptor(new RefreshTokenInterceptor(stringRedisTemplate));//拦截所有请求.....
+                        "/user/code","/user/login","/blog/hot","/shop/**","/shop-type/**","/voucher/**"
+                ).order(1);
+        registry.addInterceptor(new RefreshTokenInterceptor(stringRedisTemplate)).addPathPatterns("/**").order(0);//拦截所有请求.....
     }
 }
